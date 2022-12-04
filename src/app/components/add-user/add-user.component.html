@@ -1,11 +1,125 @@
+<h3>Add New User</h3>
+<form [formGroup]="userFormData" autocomplete="off">
+<div class="grid p-fluid">
+    <div class="col-12 md:col-6">
+        <label for="firstName" class="block">Firs Name</label>
+        <input id="firstName" 
+               type="username" 
+               formControlName="firstName"
+               aria-describedby="firstName-help" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('firstName')}"
+               pInputText />
+        <small id="firstName-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('firstName')">First Name is required with a minimum of 3 carateres.</small>
+    </div>
+    
+    <div class="col-12 md:col-6">
+        <label for="lastName" class="block">Last Name</label>
+        <input id="lastName" 
+               type="username" 
+               formControlName="lastName"
+               aria-describedby="lastName-help" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('lastName')}"
+               pInputText />
+        <small id="lastName-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('lastName')">Last Name is required with a minimum of 3 carateres.</small>
+    </div>
+    
+    <div class="col-12 md:col-6">
+        <label for="email" class="block">Email</label>
+        <input id="email" 
+               type="email" 
+               formControlName="email"
+               aria-describedby="email-help" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('email')}"
+               pInputText />
+        <small id="email-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('email')">Email must be valid and required.</small>
+    </div>
+    
+    <div class="col-12 md:col-6">
+        <label for="carrier" class="block">Corrier</label>
+        <input id="carrier" 
+               type="text" 
+               formControlName="carrier"
+               aria-describedby="carrier-help" 
+               class="ng-invalid ng-dirty" 
+               pInputText />
+        <small id="carrier-help" class="p-error block">Username is not available.</small>
+    </div>
+
+    <div class="col-12 md:col-9">
+        <label for="address" class="block">Address</label>
+        <input id="address" 
+               type="text" 
+               formControlName="address"
+               aria-describedby="address-help" 
+               class="ng-invalid ng-dirty" 
+               pInputText />
+        <small id="address-help" class="p-error block">Username is not available.</small>
+    </div>
+
+    <div class="col-12 md:col-3">
+        <label for="birthDate">DateFormat</label>
+        <p-calendar [(ngModel)]="date2" 
+                    dateFormat="mm-dd-yy" 
+                    formControlName="birthDate"
+                    inputId="birthDate"></p-calendar>
+    </div>
+    
+    <div class="col-12 md:col-4">
+        <label for="city" class="block">City</label>
+        <input id="city" 
+               type="text" 
+               formControlName="city"
+               aria-describedby="city-help" 
+               class="ng-invalid ng-dirty" 
+               pInputText />
+        <small id="city-help" class="p-error block">Username is not available.</small>
+    </div>
+    
+    <div class="col-12 md:col-4">
+        <label for="country" class="block">Country</label>
+        <input id="country" 
+               type="text" 
+               formControlName="country"
+               aria-describedby="country-help" 
+               class="ng-invalid ng-dirty" 
+               pInputText />
+        <small id="country-help" class="p-error block">Username is not available.</small>
+    </div>
+    
+    <div class="col-12 md:col-4">
+        <label for="zip" class="block">ZIP Code</label>
+        <input id="zip" 
+               type="number" 
+               formControlName="zip"
+               aria-describedby="zip-help" 
+               class="ng-invalid ng-dirty" 
+               pInputText />
+        <small id="zip-help" class="p-error block">Username is not available.</small>
+    </div>
+
+    <div class="flex-1 flex justify-content-end align-content-end my-3 mr-5">
+        <p-button type="submit" 
+                  label="Click" 
+                  [disabled]="userFormData.invalid"
+                  icon="pi pi-check" 
+                  iconPos="right"></p-button>
+    </div>
+    
+</div>
+</form>
 <div class="card">
-    <h5>Add New User</h5>
-    <div class="field">
-        <label for="firstname1">Firstname</label>
-        <input id="firstname1" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-    </div>
-    <div class="field">
-        <label for="lastname1">Lastname</label>
-        <input id="lastname1" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-    </div>
+    <h6>Valid</h6>
+    <p>{{userFormData.valid}}</p>
+    <h6>Pristine</h6>
+    <p>{{userFormData.pristine}}</p>
+    <h6>Touched</h6>
+    <p>{{userFormData.touched}}</p>
+    <h6>Value</h6>
+    <p>{{userFormData.value | json}}</p>
 </div>
