@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class AddUserComponent implements OnInit {
   })
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +59,15 @@ export class AddUserComponent implements OnInit {
     return this.userFormData.controls[field].invalid
            &&
            this.userFormData.controls[field].touched
+  }
+
+  addUser() {
+    if(this.userFormData.invalid) {
+      this.userFormData.markAllAsTouched;
+      return;
+    }
+    this.apiService.addUser(this.userFormData.value)
+    console.log('this.userFormData.value ->', this.userFormData.value)
   }
 
 }

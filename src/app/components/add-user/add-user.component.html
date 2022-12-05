@@ -1,5 +1,7 @@
 <h3>Add New User</h3>
-<form [formGroup]="userFormData" autocomplete="off">
+<form [formGroup]="userFormData" 
+      (ngSubmit)="addUser()"
+      autocomplete="off">
 <div class="grid p-fluid">
     <div class="col-12 md:col-6">
         <label for="firstName" class="block">Firs Name</label>
@@ -46,9 +48,11 @@
                type="text" 
                formControlName="carrier"
                aria-describedby="carrier-help" 
-               class="ng-invalid ng-dirty" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('carrier')}"
                pInputText />
-        <small id="carrier-help" class="p-error block">Username is not available.</small>
+        <small id="carrier-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('carrier')">Username is not available.</small>
     </div>
 
     <div class="col-12 md:col-9">
@@ -57,9 +61,11 @@
                type="text" 
                formControlName="address"
                aria-describedby="address-help" 
-               class="ng-invalid ng-dirty" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('address')}"
                pInputText />
-        <small id="address-help" class="p-error block">Username is not available.</small>
+        <small id="address-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('address')">Username is not available.</small>
     </div>
 
     <div class="col-12 md:col-3">
@@ -67,6 +73,7 @@
         <p-calendar [(ngModel)]="date2" 
                     dateFormat="mm-dd-yy" 
                     formControlName="birthDate"
+                    [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('birthDate')}"
                     inputId="birthDate"></p-calendar>
     </div>
     
@@ -76,9 +83,11 @@
                type="text" 
                formControlName="city"
                aria-describedby="city-help" 
-               class="ng-invalid ng-dirty" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('city')}"
                pInputText />
-        <small id="city-help" class="p-error block">Username is not available.</small>
+        <small id="city-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('city')">Username is not available.</small>
     </div>
     
     <div class="col-12 md:col-4">
@@ -87,9 +96,11 @@
                type="text" 
                formControlName="country"
                aria-describedby="country-help" 
-               class="ng-invalid ng-dirty" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('country')}"
                pInputText />
-        <small id="country-help" class="p-error block">Username is not available.</small>
+        <small id="country-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('country')">Username is not available.</small>
     </div>
     
     <div class="col-12 md:col-4">
@@ -98,9 +109,11 @@
                type="number" 
                formControlName="zip"
                aria-describedby="zip-help" 
-               class="ng-invalid ng-dirty" 
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('zip')}"
                pInputText />
-        <small id="zip-help" class="p-error block">Username is not available.</small>
+        <small id="zip-help" 
+               class="p-error block"
+               *ngIf="fieldIsInvalid('zip')">Username is not available.</small>
     </div>
 
     <div class="flex-1 flex justify-content-end align-content-end my-3 mr-5">
