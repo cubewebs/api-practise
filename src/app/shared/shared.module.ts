@@ -5,6 +5,7 @@ import {MenubarModule} from 'primeng/menubar';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { MenubarComponent } from './menubar/menubar.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MenubarComponent } from './menubar/menubar.component';
   imports: [
     CommonModule,
     SharedRoutingModule,
-    MenubarModule
+    MenubarModule,
+	InputTextModule
   ],
   exports: [
     MenubarModule,

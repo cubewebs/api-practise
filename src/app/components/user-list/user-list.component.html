@@ -1,16 +1,20 @@
 <div class="grid">
-    <p-card class="col-4 flex flex-column" *ngFor="let user of users" [style]="{height: '100%'}">
+    <p-card class="col-4" *ngFor="let user of users" [style]="{height: '100%'}">
 		<ng-template pTemplate="header">
 			<img *ngIf="[user.avatar == null]" src="../assets/img/no-image.jpeg" alt="user.first_name">
 		</ng-template>
 		<hr>
-		<h4>{{user.first_name}} {{user.last_name}}</h4>
-		<p>{{user.email}}</p>
-		<p>{{user.address}}</p>
-		<p>{{user.city}}</p>
-		<p>{{user.country}}</p>
-		<ng-template pTemplate="footer" class="align-self-end">
-			{{user.id}}
-		</ng-template>
+		<div class="grid">
+			<div class="col-2">ID: {{user.id}}</div>
+			<div class="col-10 flex justify-content-end">
+				<p-button label="Edit" icon="pi pi-user-edit"></p-button>
+				<p-button label="Delete" icon="pi pi-user-minus" styleClass="p-button-danger" [style]="{'margin-left': '.5em'}"></p-button>
+			</div>
+		</div>
+		<h4><small>Name:</small> {{user.first_name}} {{user.last_name}}</h4>
+		<p><small>Email:</small> {{user.email}}</p>
+		<p><small>Address:</small> {{user.address}}</p>
+		<p><small>City:</small> {{user.city}}</p>
+		<p><small>Country:</small> {{user.country}}</p>
 	</p-card>
 </div>
