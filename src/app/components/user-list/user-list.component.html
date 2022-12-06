@@ -1,0 +1,16 @@
+<div class="grid">
+    <p-card class="col-4 flex flex-column" *ngFor="let user of users" [style]="{height: '100%'}">
+		<ng-template pTemplate="header">
+			<img *ngIf="[user.avatar == null]" src="../assets/img/no-image.jpeg" alt="user.first_name">
+		</ng-template>
+		<hr>
+		<h4>{{user.first_name}} {{user.last_name}}</h4>
+		<p>{{user.email}}</p>
+		<p>{{user.address}}</p>
+		<p>{{user.city}}</p>
+		<p>{{user.country}}</p>
+		<ng-template pTemplate="footer" class="align-self-end">
+			{{user.id}}
+		</ng-template>
+	</p-card>
+</div>

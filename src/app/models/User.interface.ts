@@ -1,4 +1,4 @@
-export interface Resp {
+export interface resp {
     page:        number;
     per_page:    number;
     total:       number;

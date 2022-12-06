@@ -12,18 +12,21 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CheckboxModule} from 'primeng/checkbox';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ButtonModule} from 'primeng/button';
+import {CardModule} from 'primeng/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { SharedModule } from './shared/shared.module';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    AddUserComponent
+    AddUserComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { SharedModule } from './shared/shared.module';
     CheckboxModule,
     RadioButtonModule,
     ButtonModule,
+	CardModule,
     SharedModule,
     ReactiveFormsModule
   ],

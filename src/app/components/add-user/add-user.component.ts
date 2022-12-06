@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/User.interface';
 import { ApiService } from 'src/app/services/api.service';
 
 
@@ -9,6 +10,9 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
+
+	users: User[] = [];
+	edit: boolean = false;
 
   date2!: Date;
   dates!: Date[];
@@ -34,6 +38,8 @@ export class AddUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+	this.getUsers();
 
     let today = new Date();
     let month = today.getMonth();
@@ -61,6 +67,10 @@ export class AddUserComponent implements OnInit {
            this.userFormData.controls[field].touched
   }
 
+  getUsers() {
+	this.apiService.getUsers().subscribe( users => this.users = users )
+  }
+
   addUser() {
     if(this.userFormData.invalid) {
       this.userFormData.markAllAsTouched;
@@ -68,6 +78,19 @@ export class AddUserComponent implements OnInit {
     }
     this.apiService.addUser(this.userFormData.value)
     console.log('this.userFormData.value ->', this.userFormData.value)
+	this.getUsers();
   }
+
+  deleteUser( user: User) {
+	this.apiService.deleteUser(user.id)
+	.subscribe()
+	this.getUsers();
+  }
+
+  toggleUser( user: User ) {
+	this.edit = true;
+	user.id
+  }
+
 
 }
