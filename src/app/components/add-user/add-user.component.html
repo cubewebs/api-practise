@@ -3,6 +3,20 @@
       (ngSubmit)="addUser()"
       autocomplete="off">
 <div class="grid p-fluid">
+	<div class="col-12 md:col-12">
+		<label for="avatar" class="block">Upload Avatar</label>
+		<p-fileUpload name="demo[]" 
+					  url="./upload.php" 
+					  id="avatar"
+					  (onUpload)="onUpload($event)"
+					  accept="image/*">
+		<ng-template pTemplate="content">
+			<ul *ngIf="uploadedFiles.length">
+				<li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+			</ul>
+		</ng-template>
+		</p-fileUpload>
+	</div>
     <div class="col-12 md:col-6">
         <label for="firstName" class="block">Firs Name</label>
         <input id="firstName" 
@@ -55,6 +69,15 @@
                *ngIf="fieldIsInvalid('carrier')">Username is not available.</small>
     </div>
 
+    <div class="col-12 md:col-3">
+        <label for="birthDate">Birth Date</label>
+        <p-calendar [(ngModel)]="date2" 
+                    dateFormat="dd-mm-yy" 
+                    formControlName="birthDate"
+                    [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('birthDate')}"
+                    inputId="birthDate"></p-calendar>
+    </div>
+
     <div class="col-12 md:col-9">
         <label for="address" class="block">Address</label>
         <input id="address" 
@@ -66,15 +89,6 @@
         <small id="address-help" 
                class="p-error block"
                *ngIf="fieldIsInvalid('address')">Username is not available.</small>
-    </div>
-
-    <div class="col-12 md:col-3">
-        <label for="birthDate">DateFormat</label>
-        <p-calendar [(ngModel)]="date2" 
-                    dateFormat="dd-mm-yy" 
-                    formControlName="birthDate"
-                    [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('birthDate')}"
-                    inputId="birthDate"></p-calendar>
     </div>
     
     <div class="col-12 md:col-4">
@@ -119,6 +133,13 @@
     <div class="flex-1 flex justify-content-end align-content-end my-3 mr-5">
         <p-button type="submit" 
                   label="Click" 
+                  [disabled]="userFormData.invalid"
+                  icon="pi pi-check" 
+                  iconPos="right"
+				  *ngIf="!edit"></p-button>
+        <p-button *ngIf="edit"
+				  type="submit" 
+                  label="Update" 
                   [disabled]="userFormData.invalid"
                   icon="pi pi-check" 
                   iconPos="right"></p-button>

@@ -13,6 +13,7 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,7 +43,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     ButtonModule,
 	CardModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+	FileUploadModule
   ],
   exports: [
 	InputTextModule

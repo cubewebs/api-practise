@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/User.interface';
 import { ApiService } from 'src/app/services/api.service';
@@ -10,15 +12,17 @@ import { ComcomService } from 'src/app/services/comcom.service';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css'],
+  providers: [MessageService]
 })
 export class AddUserComponent implements OnInit {
 
 	users: User[] = [];
-  user!: User;
-  id: number = 0;
+  	user!: User;
+  	id!: number;
 	edit: boolean = false;
-  subs?: Subscription;
+ 	subs?: Subscription;
+	uploadedFiles: any[] = [];
 
   date2!: Date;
   dates!: Date[];
@@ -42,16 +46,17 @@ export class AddUserComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private cc: ComcomService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+	private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
 
-    this.cc.userIdSubject.subscribe( id => this.id = id )
+    this.checkIfId();
 
-    this.updateUser();
+    this.populateUser();
 
-	  this.getUsers();
+	this.getUsers();
 
     let today = new Date();
     let month = today.getMonth();
@@ -71,6 +76,19 @@ export class AddUserComponent implements OnInit {
     invalidDate.setDate(today.getDate() - 1);
     this.invalidDates = [today,invalidDate];
 
+  }
+
+  onUpload(event: any) {
+	for(let file of event.files) {
+		this.uploadedFiles.push(file);
+	}
+
+	this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+}
+
+  checkIfId() {
+	this.cc.userIdSubject.subscribe( id => this.id = id )
+	console.log('this.id ->', this.id)
   }
 
   fieldIsInvalid( field: string ) {
@@ -99,23 +117,36 @@ export class AddUserComponent implements OnInit {
     this.getUsers();
   }
 
-  updateUser() {
+  populateUser() {
+	
     this.subs = this.route.paramMap.subscribe( params => {
-      this.id = Number(params.get('id'))
-    });
-    this.apiService.getUserById(this.id).subscribe( user => {
-      this.userFormData = this.fb.group({
-        firstName: [ user.first_name ],
-        lastName: [ user.last_name ],
-        birthDate: [ user.birthDate ],
-        email: [ user.email ],
-        carrier: [ user.corrier ],
-        address: [ user.address ],
-        city: [ user.city ],
-        country: [ user.country ],
-        zip: [ user.zip ],
-      })
-    });
+		this.id = Number(params.get('id'))
+	  });
+
+	  if(this.id < 1) {
+		this.edit = false;
+		return;
+	  } else {
+		this.edit = true;
+		this.apiService.getUserById(this.id).subscribe( user => {
+			this.userFormData = this.fb.group({
+			  firstName: [ user.first_name ],
+			  lastName: [ user.last_name ],
+			  birthDate: [ user.birthDate ],
+			  email: [ user.email ],
+			  carrier: [ user.corrier ],
+			  address: [ user.address ],
+			  city: [ user.city ],
+			  country: [ user.country ],
+			  zip: [ user.zip ],
+			})
+		  });
+	  }
+
+  }
+
+  updateUser() {
+
   }
 
 
