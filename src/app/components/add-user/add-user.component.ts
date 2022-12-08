@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/User.interface';
 import { ApiService } from 'src/app/services/api.service';
+import { ComcomService } from 'src/app/services/comcom.service';
 
 
 @Component({
@@ -12,7 +15,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class AddUserComponent implements OnInit {
 
 	users: User[] = [];
+  user!: User;
+  id: number = 0;
 	edit: boolean = false;
+  subs?: Subscription;
 
   date2!: Date;
   dates!: Date[];
@@ -34,12 +40,18 @@ export class AddUserComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private cc: ComcomService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
-	this.getUsers();
+    this.cc.userIdSubject.subscribe( id => this.id = id )
+
+    this.updateUser();
+
+	  this.getUsers();
 
     let today = new Date();
     let month = today.getMonth();
@@ -68,7 +80,7 @@ export class AddUserComponent implements OnInit {
   }
 
   getUsers() {
-	this.apiService.getUsers().subscribe( users => this.users = users )
+	  this.apiService.getUsers().subscribe( users => this.users = users )
   }
 
   addUser() {
@@ -77,19 +89,32 @@ export class AddUserComponent implements OnInit {
       return;
     }
     this.apiService.addUser(this.userFormData.value)
-    console.log('this.userFormData.value ->', this.userFormData.value)
-	this.getUsers();
+    .subscribe( response => console.log('response ->', response))
   }
 
   deleteUser( user: User) {
-	this.apiService.deleteUser(user.id)
-	.subscribe()
-	this.getUsers();
+    this.apiService.deleteUser(user.id)
+    .subscribe()
+    this.getUsers();
   }
 
-  toggleUser( user: User ) {
-	this.edit = true;
-	user.id
+  updateUser() {
+    this.subs = this.route.paramMap.subscribe( params => {
+      this.id = Number(params.get('id'))
+    });
+    this.apiService.getUserById(this.id).subscribe( user => {
+      this.userFormData = this.fb.group({
+        firstName: [ user.first_name ],
+        lastName: [ user.last_name ],
+        birthDate: [ user.birthDate ],
+        email: [ user.email ],
+        carrier: [ user.corrier ],
+        address: [ user.address ],
+        city: [ user.city ],
+        country: [ user.country ],
+        zip: [ user.zip ],
+      })
+    });
   }
 
 

@@ -43,11 +43,16 @@ export class ApiService {
 
   }
 
-  updateUser( user: User ): Observable<User> {
+  updateUser( user: number ): Observable<number> {
 	
 	const url = `${this.baseUrl}data/${user}`;
 
-	return this.http.put<User>( url, user, httpOptions );
+	return this.http.put<number>( url, user, httpOptions );
+  }
+
+  getUserById( id: number ): Observable<User> {
+    const url = `${this.baseUrl}data/${id}`;
+    return this.http.get<User>(url)
   }
 
 }

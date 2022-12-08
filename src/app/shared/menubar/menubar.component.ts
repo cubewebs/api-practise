@@ -18,8 +18,8 @@ export class MenubarComponent implements OnInit {
     this.items = [
       {
           label: 'Users',
-		  icon: 'pi pi-fw pi-users',
-		  routerLink: 'user-list'
+		      icon: 'pi pi-fw pi-users',
+		      routerLink: 'user-list'
       },
       {
           label: 'Add User',
