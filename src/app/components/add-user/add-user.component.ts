@@ -89,7 +89,8 @@ export class AddUserComponent implements OnInit {
       return;
     }
     this.apiService.addUser(this.userFormData.value)
-    .subscribe( response => console.log('response ->', response))
+    .subscribe( response => console.log('response ->', response));
+	this.userFormData.reset();
   }
 
   deleteUser( user: User) {

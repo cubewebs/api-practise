@@ -19,6 +19,10 @@ export class UserListComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.getUsers();
+	}
+
+	getUsers() {
 		this.apiService.getUsers()
 		.subscribe( users => this.users = users )
 	}
@@ -26,6 +30,13 @@ export class UserListComponent implements OnInit {
 	editUser( id: number ) {
 		this.cc.userEvent( id )
 		this.route.navigateByUrl(`add-user/${id}`)
+	}
+
+	deleteUser( id: number ) {
+
+		this.apiService.deleteUser( id ).subscribe();
+		this.getUsers();
+
 	}
 
 }

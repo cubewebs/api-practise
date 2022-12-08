@@ -35,11 +35,11 @@ export class ApiService {
 	
   }
 
-  deleteUser( user: number ): Observable<number> {
+  deleteUser( user: number ): Observable<User> {
 
 	const url = `${this.baseUrl}data/${user}`;
 
-	return this.http.delete<number>( url );
+	return this.http.delete<User>( url );
 
   }
 
