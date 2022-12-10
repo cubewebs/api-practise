@@ -14,6 +14,9 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import {FileUploadModule} from 'primeng/fileupload';
+import {OrderListModule} from 'primeng/orderlist';
+import {PickListModule} from 'primeng/picklist';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,13 +24,15 @@ import { MainComponent } from './components/main/main.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { SharedModule } from './shared/shared.module';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AddUserComponent,
-    UserListComponent
+    UserListComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,10 @@ import { UserListComponent } from './components/user-list/user-list.component';
 	CardModule,
     SharedModule,
     ReactiveFormsModule,
-	FileUploadModule
+	FileUploadModule,
+	OrderListModule,
+	PickListModule,
+	InputNumberModule
   ],
   exports: [
 	InputTextModule

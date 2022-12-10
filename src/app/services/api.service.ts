@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from '../models/User.interface';
 import { Observable } from 'rxjs';
+import { Package } from '../models/Package.interface';
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -18,7 +19,7 @@ export class ApiService {
   constructor(
     private http: HttpClient
   ) { }
-
+// User calls
   getUsers(): Observable<User[]> {
 
 	const url = `${this.baseUrl}data`;
@@ -54,5 +55,19 @@ export class ApiService {
     const url = `${this.baseUrl}data/${id}`;
     return this.http.get<User>(url)
   }
+
+
+  // Packages calls
+
+  addPackage( pkg: Package ): Observable<Package> {
+	const url = `${this.baseUrl}packages`;
+	return this.http.post<Package>( url, pkg, httpOptions );
+  }
+
+  updatePkg( pkg: Package): Observable<Package> {
+	const url = `${this.baseUrl}packages/${pkg.id}`;
+	return this.http.put<Package>( url, pkg.id, httpOptions)
+  }
+
 
 }

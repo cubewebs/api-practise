@@ -135,6 +135,66 @@
       "id": 16
     }
   ],
+  "packages": [
+    {
+      "id": 1,
+      "netWeight": 200,
+      "grossWeight": 250,
+      "description": "Fragil",
+      "transport": "Airplain",
+      "status": "created"
+    },
+    {
+      "id": 2,
+      "netWeight": 0,
+      "grossWeight": 0,
+      "description": "",
+      "transport": {
+        "type": "Airplain"
+      },
+      "status": "created"
+    },
+    {
+      "id": 3,
+      "netWeight": 0,
+      "grossWeight": 0,
+      "description": "",
+      "transport": {
+        "type": "Airplain"
+      },
+      "status": "created"
+    },
+    {
+      "id": 4,
+      "netWeight": 0,
+      "grossWeight": 0,
+      "description": "",
+      "transport": {
+        "type": "Airplain"
+      },
+      "status": "created"
+    },
+    {
+      "id": 5,
+      "netWeight": 0,
+      "grossWeight": 0,
+      "description": "",
+      "transport": {
+        "type": "Airplain"
+      },
+      "status": "created"
+    },
+    {
+      "id": 6,
+      "netWeight": 0,
+      "grossWeight": 0,
+      "description": "",
+      "transport": {
+        "type": "Airplain"
+      },
+      "status": "created"
+    }
+  ],
   "resp": [
     {
       "page": 1,

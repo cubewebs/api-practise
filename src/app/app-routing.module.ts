@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { OrderComponent } from './components/order/order.component';
 
 const routes: Routes = [
 	{
@@ -16,6 +17,10 @@ const routes: Routes = [
 	{
 		path: 'user-list',
 		component: UserListComponent
+	},
+	{
+		path: 'order',
+		component: OrderComponent
 	},
 	{
 		path: '**',

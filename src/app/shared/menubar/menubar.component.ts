@@ -25,7 +25,12 @@ export class MenubarComponent implements OnInit {
           label: 'Add User',
           icon: 'pi pi-fw pi-user-plus',
           routerLink: 'add-user'
-      }
+      },
+	  {
+		label: 'Order',
+		icon: 'pi pi-fw pi-shopping-cart',
+		routerLink: 'order'
+	  }
   ];
     
   }

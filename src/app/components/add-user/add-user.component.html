@@ -5,14 +5,14 @@
 <div class="grid p-fluid">
 	<div class="col-12 md:col-12">
 		<label for="avatar" class="block">Upload Avatar</label>
-		<p-fileUpload name="demo[]" 
-					  url="./upload.php" 
+		<p-fileUpload name="files[]" 
 					  id="avatar"
-					  (onUpload)="onUpload($event)"
+					  [customUpload]="true"
+					  (uploadHandler)="onUpload($event)"
 					  accept="image/*">
 		<ng-template pTemplate="content">
-			<ul *ngIf="uploadedFiles.length">
-				<li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+			<ul *ngIf="fileToUpload.length">
+				<li *ngFor="let file of fileToUpload">{{file.name}} - {{file.size}} bytes</li>
 			</ul>
 		</ng-template>
 		</p-fileUpload>
@@ -71,8 +71,7 @@
 
     <div class="col-12 md:col-3">
         <label for="birthDate">Birth Date</label>
-        <p-calendar [(ngModel)]="date2" 
-                    dateFormat="dd-mm-yy" 
+        <p-calendar dateFormat="dd-mm-yy" 
                     formControlName="birthDate"
                     [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('birthDate')}"
                     inputId="birthDate"></p-calendar>

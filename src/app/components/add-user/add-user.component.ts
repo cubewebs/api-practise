@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/User.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { ComcomService } from 'src/app/services/comcom.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,32 +23,28 @@ export class AddUserComponent implements OnInit {
   	id!: number;
 	edit: boolean = false;
  	subs?: Subscription;
-	uploadedFiles: any[] = [];
-
-  date2!: Date;
-  dates!: Date[];
-  rangeDates!: Date[];
-  minDate!: Date;
-  maxDate!: Date;
-  invalidDates!: Array<Date>
-  userFormData: FormGroup = this.fb.group({
-    firstName: ['', [Validators.required, Validators.minLength(3)]],
-    lastName: ['', [Validators.required, Validators.minLength(3)]],
-    birthDate: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    carrier: ['', [Validators.required, Validators.minLength(3)]],
-    address: ['', [Validators.required, Validators.minLength(3)]],
-    city: ['', [Validators.required]],
-    country: ['', [Validators.required]],
-    zip: ['', [Validators.required]],
-  })
+	fileToUpload: any[] = [];
+  
+	userFormData: FormGroup = this.fb.group({
+		firstName: ['', [Validators.required, Validators.minLength(3)]],
+		lastName: ['', [Validators.required, Validators.minLength(3)]],
+		birthDate: ['', [Validators.required]],
+		email: ['', [Validators.required, Validators.email]],
+		carrier: ['', [Validators.required, Validators.minLength(3)]],
+		address: ['', [Validators.required, Validators.minLength(3)]],
+		city: ['', [Validators.required]],
+		country: ['', [Validators.required]],
+		zip: ['', [Validators.required]],
+		avatar: new FormData()
+	})
 
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
     private cc: ComcomService,
     private route: ActivatedRoute,
-	private messageService: MessageService
+	private messageService: MessageService,
+	private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -58,37 +55,33 @@ export class AddUserComponent implements OnInit {
 
 	this.getUsers();
 
-    let today = new Date();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-    let prevMonth = (month === 0) ? 11 : month -1;
-    let prevYear = (prevMonth === 11) ? year - 1 : year;
-    let nextMonth = (month === 11) ? 0 : month + 1;
-    let nextYear = (nextMonth === 0) ? year + 1 : year;
-    this.minDate = new Date();
-    this.minDate.setMonth(prevMonth);
-    this.minDate.setFullYear(prevYear);
-    this.maxDate = new Date();
-    this.maxDate.setMonth(nextMonth);
-    this.maxDate.setFullYear(nextYear);
-
-    let invalidDate = new Date();
-    invalidDate.setDate(today.getDate() - 1);
-    this.invalidDates = [today,invalidDate];
-
   }
 
-  onUpload(event: any) {
-	for(let file of event.files) {
-		this.uploadedFiles.push(file);
-	}
+  base64Extract = async ($event: any) => new Promise( ( resolve,reject ) => {
+		try {
+			const unsafeImg = window.URL.createObjectURL($event);
+			const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+			const reader = new FileReader();
+			reader.readAsDataURL($event);
+			reader.onload = () => {
+				resolve({
+					base: reader.result
+				});
+			};
+		} catch (error) {
+			console.error(error);
+		}
+  } )	
 
-	this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-}
+  onUpload(event: any) {
+		this.fileToUpload = event.files[0]
+		this.base64Extract(this.fileToUpload[0]);
+		this.userFormData.controls['formData'].setValue('avatar', this.fileToUpload[0]);
+		this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+	}
 
   checkIfId() {
 	this.cc.userIdSubject.subscribe( id => this.id = id )
-	console.log('this.id ->', this.id)
   }
 
   fieldIsInvalid( field: string ) {

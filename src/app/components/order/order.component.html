@@ -1,0 +1,103 @@
+<div class="card p-6 border-1 border-bluegray-100">
+	<div class="grid p-2">
+		<div class="grid col-12 border-1 border-bluegray-100">
+			<div class="col-3">
+				<p-button label="Create Package" 
+						  icon="pi pi-check" 
+						  iconPos="right"
+						  (click)="addPackage()"></p-button>
+			</div>
+			<div class="col-9">
+				<div class="p-inputgroup">
+					<label for="weight">Distribute Weight &nbsp;</label>
+					<p-inputNumber [(ngModel)]="defaultValue1" inputId="weight" suffix=" Kg" mode="decimal">
+					</p-inputNumber>
+					<button type="button" pButton pRipple icon="pi pi-check" styleClass="p-button-success"></button>   
+				</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<label for="pkgsLi">Packages List</label>
+			<div id="pkgsLi" class="card border-1 border-bluegray-100">
+				<p-orderList [value]="packages">
+					<ng-template let-car pTemplate="item">
+						<div>
+							<div style="font-size:14px;float:right;margin:15px 5px 0 0">{{packages}}</div>
+						</div>
+					</ng-template>
+				</p-orderList>
+			</div>
+		</div>
+		<div class="col-9">
+			<form [formGroup]="packageFormData" (submit)="submit()">
+				<label for="pkgsDi">Packages Details</label>
+				<div #pkgDite 
+					id="pkgDi" 
+					class="card border-1 border-bluegray-100"
+					*ngIf="isPackage">
+					<div class="grid p-fluid p-4">
+						<div class="col-12"><h4>Package ID: {{packageFormData}}</h4></div>
+						<div class="col-12 md:col-6">
+							<div class="field">
+								<label for="netWeight" class="block">Net Weight</label>
+								<input id="netWeight" 
+									   type="number" 
+									   aria-describedby="netWeight-help" 
+									   class="ng-invalid ng-dirty" 
+									   pInputText
+									   formControlName="netWeight" />
+								<small id="netWeight-help" 
+										class="p-error block"
+										*ngIf="fieldIsInvalid('netWeight')">Net weight is required.</small>
+							</div>
+						</div>
+						<div class="col-12 md:col-6">
+							<div class="field">
+								<label for="grossWeight" class="block">Gross Weight</label>
+								<input id="grossWeight" 
+									   type="username" 
+									   aria-describedby="grossWeight-help" 
+									   class="ng-invalid ng-dirty" 
+									   pInputText
+									   formControlName="grossWeight" />
+								<small id="grossWeight-help" 
+										class="p-error block"
+										*ngIf="fieldIsInvalid('grossWeight')">Gross weight is required.</small>
+							</div>
+						</div>
+						<div class="col-12 md:col-6">
+							<div class="field">
+								<label for="description" class="block">Description</label>
+								<input id="description" 
+									   type="username" 
+									   aria-describedby="description-help" 
+									   class="ng-invalid ng-dirty" 
+									   pInputText
+									   formControlName="description" />
+							</div>
+						</div>
+						<div class="col-12 md:col-6">
+							<div class="field">
+								<label for="transport" class="block">Transport</label>
+								<p-dropdown [options]="transports" 
+											optionLabel="type"
+											formControlName="transport">
+								</p-dropdown>
+								<small id="transport-help" 
+										class="p-error block"
+										*ngIf="fieldIsInvalid('transport')">Transport type is required.</small>
+							</div>
+						</div>
+						<div class="flex-1 flex justify-content-end align-content-end my-3 mr-5">
+							<p-button type="submit" 
+									  label="Save" 
+									  [disabled]="packageFormData.invalid"
+									  icon="pi pi-check" 
+									  iconPos="right"></p-button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
