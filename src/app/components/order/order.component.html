@@ -1,5 +1,6 @@
 <div class="card p-6 border-1 border-bluegray-100">
 	<div class="grid p-2">
+		<div class="col-12">Order ID: {{order | json}}</div>
 		<div class="grid col-12 border-1 border-bluegray-100">
 			<div class="col-3">
 				<p-button label="Create Package" 
@@ -20,9 +21,11 @@
 			<label for="pkgsLi">Packages List</label>
 			<div id="pkgsLi" class="card border-1 border-bluegray-100">
 				<p-orderList [value]="packages">
-					<ng-template let-car pTemplate="item">
-						<div>
-							<div style="font-size:14px;float:right;margin:15px 5px 0 0">{{packages}}</div>
+					<ng-template let-pkg pTemplate="item" let-i=index>
+						<div class="product-list-detail" (click)="onSelectPkg(i)">
+							<h5 class="mb-2">{{pkg.status}}</h5>
+							<i class="pi pi-box product-category-icon"></i>
+							<span class="product-category"> Package ID: {{pkg.id}}</span>
 						</div>
 					</ng-template>
 				</p-orderList>
@@ -36,7 +39,9 @@
 					class="card border-1 border-bluegray-100"
 					*ngIf="isPackage">
 					<div class="grid p-fluid p-4">
-						<div class="col-12"><h4>Package ID: {{packageFormData}}</h4></div>
+						<div class="col-12">
+							<h4>Order ID: {{order.id}}</h4>
+						</div>
 						<div class="col-12 md:col-6">
 							<div class="field">
 								<label for="netWeight" class="block">Net Weight</label>

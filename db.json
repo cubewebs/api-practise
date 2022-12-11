@@ -135,6 +135,26 @@
       "id": 16
     }
   ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 6,
+      "packages": [
+        1,
+        2
+      ]
+    },
+    {
+      "userId": 7,
+      "packages": [],
+      "id": 2
+    },
+    {
+      "userId": 8,
+      "packages": [],
+      "id": 3
+    }
+  ],
   "packages": [
     {
       "id": 1,
@@ -142,7 +162,8 @@
       "grossWeight": 250,
       "description": "Fragil",
       "transport": "Airplain",
-      "status": "created"
+      "status": "created",
+      "orderId": 1
     },
     {
       "id": 2,
@@ -152,7 +173,8 @@
       "transport": {
         "type": "Airplain"
       },
-      "status": "created"
+      "status": "created",
+      "orderId": 1
     },
     {
       "id": 3,
@@ -162,7 +184,8 @@
       "transport": {
         "type": "Airplain"
       },
-      "status": "created"
+      "status": "created",
+      "orderId": 3
     },
     {
       "id": 4,
@@ -172,27 +195,8 @@
       "transport": {
         "type": "Airplain"
       },
-      "status": "created"
-    },
-    {
-      "id": 5,
-      "netWeight": 0,
-      "grossWeight": 0,
-      "description": "",
-      "transport": {
-        "type": "Airplain"
-      },
-      "status": "created"
-    },
-    {
-      "id": 6,
-      "netWeight": 0,
-      "grossWeight": 0,
-      "description": "",
-      "transport": {
-        "type": "Airplain"
-      },
-      "status": "created"
+      "status": "created",
+      "orderId": 3
     }
   ],
   "resp": [

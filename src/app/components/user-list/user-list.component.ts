@@ -39,4 +39,11 @@ export class UserListComponent implements OnInit {
 
 	}
 
+	addOrder( userId: number ) {
+		let orderId!: number;
+		this.apiService.addOrder( userId ).subscribe( response => {
+			this.route.navigateByUrl(`order/` + response.id)
+		})
+	}
+
 }

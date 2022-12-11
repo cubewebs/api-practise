@@ -5,4 +5,5 @@ export interface Package {
 	description: string;
 	transport: string;
 	status: string;
+	orderId: number;
 }

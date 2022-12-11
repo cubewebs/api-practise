@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/User.interface';
 import { Observable } from 'rxjs';
 import { Package } from '../models/Package.interface';
+import { Order } from '../models/Order.interface';
 
 const httpOptions = {
 	headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -56,8 +57,31 @@ export class ApiService {
     return this.http.get<User>(url)
   }
 
+  // Order calls
+
+  addOrder( userId: number ): Observable<Order> {
+    const url = `${this.baseUrl}orders`;
+    const order = {userId, packages: []}
+    return this.http.post<Order>( url,order, httpOptions )
+  }
+
+  getOrderById( id: number ): Observable<Order> {
+    const url = `${this.baseUrl}orders/${id}`;
+    return this.http.get<Order>( url )
+  }
+
+  updateOrder( id: number ): Observable<Order> {
+    const url = `${this.baseUrl}orders/${id}`;
+    return this.http.put<Order>( url, id, httpOptions )
+  }
+
 
   // Packages calls
+
+  getPackages( orderId: number ): Observable<Package[]> {
+    const url = `${this.baseUrl}orders/${orderId}/packages`;
+    return this.http.get<Package[]>( url )
+  }
 
   addPackage( pkg: Package ): Observable<Package> {
 	const url = `${this.baseUrl}packages`;
@@ -66,7 +90,7 @@ export class ApiService {
 
   updatePkg( pkg: Package): Observable<Package> {
 	const url = `${this.baseUrl}packages/${pkg.id}`;
-	return this.http.put<Package>( url, pkg.id, httpOptions)
+	return this.http.put<Package>( url, pkg, httpOptions)
   }
 
 

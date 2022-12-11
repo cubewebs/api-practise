@@ -15,6 +15,11 @@
 						  styleClass="p-button-danger" 
 						  [style]="{'margin-left': '.5em'}"
 						  (click)="deleteUser(user.id)"></p-button>
+				<p-button label="New Order" 
+						  icon="pi pi-user-minus" 
+						  styleClass="p-button-success" 
+						  [style]="{'margin-left': '.5em'}"
+						  (click)="addOrder(user.id)"></p-button>
 			</div>
 		</div>
 		<h4><small>Name:</small> {{user.first_name}} {{user.last_name}}</h4>
