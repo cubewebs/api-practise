@@ -21,26 +21,26 @@
         <label for="firstName" class="block">Firs Name</label>
         <input id="firstName" 
                type="username" 
-               formControlName="firstName"
+               formControlName="first_name"
                aria-describedby="firstName-help" 
-               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('firstName')}"
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('first_name')}"
                pInputText />
         <small id="firstName-help" 
                class="p-error block"
-               *ngIf="fieldIsInvalid('firstName')">First Name is required with a minimum of 3 carateres.</small>
+               *ngIf="fieldIsInvalid('first_name')">First Name is required with a minimum of 3 carateres.</small>
     </div>
     
     <div class="col-12 md:col-6">
         <label for="lastName" class="block">Last Name</label>
         <input id="lastName" 
                type="username" 
-               formControlName="lastName"
+               formControlName="last_name"
                aria-describedby="lastName-help" 
-               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('lastName')}"
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('last_name')}"
                pInputText />
         <small id="lastName-help" 
                class="p-error block"
-               *ngIf="fieldIsInvalid('lastName')">Last Name is required with a minimum of 3 carateres.</small>
+               *ngIf="fieldIsInvalid('last_name')">Last Name is required with a minimum of 3 carateres.</small>
     </div>
     
     <div class="col-12 md:col-6">
@@ -57,16 +57,16 @@
     </div>
     
     <div class="col-12 md:col-6">
-        <label for="carrier" class="block">Corrier</label>
+        <label for="corrier" class="block">Corrier</label>
         <input id="carrier" 
                type="text" 
-               formControlName="carrier"
+               formControlName="corrier"
                aria-describedby="carrier-help" 
-               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('carrier')}"
+               [ngClass]="{'ng-dirty ng-invalid': fieldIsInvalid('corrier')}"
                pInputText />
         <small id="carrier-help" 
                class="p-error block"
-               *ngIf="fieldIsInvalid('carrier')">Username is not available.</small>
+               *ngIf="fieldIsInvalid('corrier')">Username is not available.</small>
     </div>
 
     <div class="col-12 md:col-3">

@@ -6,7 +6,7 @@ import { Package } from '../../models/Package.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 
 
@@ -28,15 +28,7 @@ export class OrderComponent implements OnInit {
 	selectedPackage!: Package;
 
 
-	packageFormData: FormGroup = this.fb.group({
-		id: [],
-		netWeight: [],
-		grossWeight: [],
-        description: [''],
-		transport: [''],
-        status: [''],
-		orderId: [this.orderId]
-	})
+	packageFormData!: FormGroup;
 
 
 	constructor(
@@ -46,6 +38,7 @@ export class OrderComponent implements OnInit {
 	) { 
 		
 		this.transports = [
+			{type: 'Select a Transport'},
 			{type: 'Truck'},
 			{type: 'Train'},
 			{type: 'Ship'},
@@ -59,18 +52,20 @@ export class OrderComponent implements OnInit {
 			this.orderId = id;
 		})
 
+		this.packageFormData = this.fb.group({
+			id: [],
+			netWeight: [],
+			grossWeight: [],
+			description: [],
+			transport: ['', [Validators.required]],
+			status: ['Created'],
+			orderId: [this.orderId]
+		})
+
+		this.getOrderPackages();
+
 		this.apiService.getOrderById(this.orderId).subscribe( order => this.order = order)
 
-		this.apiService.getPackages(this.orderId).subscribe( packages => this.packages = packages)
-
-		this.packageFormData.reset({
-			netWeight: 0,
-			grossWeight: 0,
-			description: '',
-			transport: {'type': 'Airplain'},
-			status: 'created',
-			orderId: this.orderId
-		})
 	}
 
 	fieldIsInvalid( field: string ) {
@@ -79,27 +74,51 @@ export class OrderComponent implements OnInit {
 			   this.packageFormData.controls[field].touched
 	}
 
+	getOrderPackages() {
+		this.apiService.getOrderPackages(this.orderId)
+		.pipe(
+			tap( pkg => pkg.forEach( pkg => this.packages.push( pkg )))
+		).subscribe( packages => this.packages = packages)
+		console.log('this.packages ->', this.packages)
+		if(this.packages.length === 0) {
+			return;
+		} else {
+			this.onSelectPkg(0);
+		}
+	}
+
 	onSelectPkg(i: number) {
 		this.selectedPackage = this.packages[i];
 		this.isPackage = true;
 		console.log('this.selectedPackage ->', this.selectedPackage)
-		this.packageFormData.reset(this.selectedPackage)
+		this.packageFormData.setValue(this.selectedPackage)
 		this.pkgId = this.packages[i].id;
 	}
 
 	addPackage() { 
+		this.packageFormData.reset({
+			id: 0,
+			netWeight: 0,
+			grossWeight: 0,
+			description: '',
+			transport: '',
+			status: 'Created',
+			orderId: this.orderId
+		});
 		this.isPackage = true;
 		this.apiService.addPackage(this.packageFormData.value).subscribe( pkg => {
 			this.packages.push(pkg)
-			console.log('pkg ->', pkg)
 			this.pkgId = pkg.id;
-			this.selectedPackage = pkg
+			this.selectedPackage = pkg;
+			console.log('pkg ->', this.selectedPackage)
 		} );
-		
+		this.getOrderPackages();
 	}
 
 	submit() { 
-		this.apiService.updatePkg(this.selectedPackage).subscribe( pkg => console.log('pkg ->', pkg) );
+		console.log('submit ->', this.selectedPackage);
+		this.selectedPackage = this.packageFormData.value;
+		this.apiService.updatePkg(this.pkgId, this.packageFormData.value).subscribe( pkg => console.log('pkg ->', pkg) );
 	}
 
 

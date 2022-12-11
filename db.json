@@ -27,132 +27,52 @@
       "avatar": null
     },
     {
-      "firstName": "Antonio",
-      "lastName": "Ruiz",
-      "birthDate": "2022-03-07T00:00:00.000Z",
-      "email": "ruiza@mail.com",
-      "carrier": "Vendedor",
-      "address": "Calle Lupin, 4",
-      "city": "Asturias",
+      "first_name": "Lucia",
+      "last_name": "Ruiz",
+      "birthDate": "2022-10-06T23:00:00.000Z",
+      "email": "lucir@testmail.com",
+      "carrier": "Cantante",
+      "address": "Calle Colmena 4",
+      "city": "Fuengirola",
       "country": "España",
-      "zip": 47234,
+      "zip": 17554,
+      "avatar": {},
       "id": 8
     },
     {
-      "firstName": "Pedro",
-      "lastName": "Picaporte",
-      "birthDate": "1979-02-07T00:00:00.000Z",
-      "email": "pepeillo@mailchulo.es",
-      "carrier": "Entrenador Personal",
-      "address": "Calle Tortilla, 3",
-      "city": "Madrid",
+      "first_name": "Maria",
+      "last_name": "Carmona",
+      "birthDate": "1992-05-05T23:00:00.000Z",
+      "email": "maricar@mailtest.com",
+      "carrier": "Administradora",
+      "address": "Calle Leica 3",
+      "city": "Marbella",
       "country": "España",
-      "zip": 28865,
+      "zip": 19883,
+      "avatar": {},
       "id": 9
-    },
-    {
-      "firstName": "Pedro",
-      "lastName": "Picaporte",
-      "birthDate": "1992-05-13T23:00:00.000Z",
-      "email": "pepeillo@mailchulo.es",
-      "carrier": "Entrenador Personal",
-      "address": "Calle Tortilla, 3",
-      "city": "Madrid",
-      "country": "España",
-      "zip": 28865,
-      "id": 10
-    },
-    {
-      "firstName": "Julian",
-      "lastName": "Bonilla",
-      "birthDate": "2022-12-01T00:00:00.000Z",
-      "email": "julib@correotest.com",
-      "carrier": "Albañil",
-      "address": "Calle Bolin, 4",
-      "city": "Madrid",
-      "country": "España",
-      "zip": 23415,
-      "id": 11
-    },
-    {
-      "firstName": "Sandra",
-      "lastName": "Pastor",
-      "birthDate": "1992-05-07T23:00:00.000Z",
-      "email": "sandri@mailme.mail",
-      "carrier": "Peluquera",
-      "address": "Avenida de la Constitución, 267",
-      "city": "Madrid",
-      "country": "España",
-      "zip": 26198,
-      "id": 12
-    },
-    {
-      "firstName": "Monica",
-      "lastName": "Naranjo",
-      "birthDate": "1978-07-25T00:00:00.000Z",
-      "email": "monic3@moni.com",
-      "carrier": "Cantante",
-      "address": "Avenida de España",
-      "city": "Madrid",
-      "country": "España",
-      "zip": 20887,
-      "id": 13
-    },
-    {
-      "firstName": "Lucia",
-      "lastName": "Ramos",
-      "birthDate": "1982-11-29T00:00:00.000Z",
-      "email": "luciaramos@mailtest.es",
-      "carrier": "Esteticien",
-      "address": "Calle Pelayo, 4",
-      "city": "Valencia",
-      "country": "España",
-      "zip": 46221,
-      "id": 14
-    },
-    {
-      "firstName": "Pablo",
-      "lastName": "Lopez",
-      "birthDate": "1994-08-16T23:00:00.000Z",
-      "email": "pabitillo@emailtes.t",
-      "carrier": "Cantautor",
-      "address": "Calle Preciados, 3",
-      "city": "Toledo",
-      "country": "España",
-      "zip": 39165,
-      "id": 15
-    },
-    {
-      "firstName": "Alejandro",
-      "lastName": "Mena",
-      "birthDate": "1977-03-20T00:00:00.000Z",
-      "email": "alexmena@test.test",
-      "carrier": "Abogado",
-      "address": "Calle Colombia, 76",
-      "city": "Zaragoza",
-      "country": "España",
-      "zip": 56223,
-      "id": 16
     }
   ],
   "orders": [
     {
       "id": 1,
-      "userId": 6,
-      "packages": [
-        1,
-        2
-      ]
+      "userId": 6
     },
     {
       "userId": 7,
-      "packages": [],
       "id": 2
     },
     {
       "userId": 8,
-      "packages": [],
       "id": 3
+    },
+    {
+      "userId": 9,
+      "id": 4
+    },
+    {
+      "userId": 6,
+      "id": 5
     }
   ],
   "packages": [
@@ -178,9 +98,20 @@
     },
     {
       "id": 3,
-      "netWeight": 0,
-      "grossWeight": 0,
-      "description": "",
+      "netWeight": 180,
+      "grossWeight": 190,
+      "description": "Pencils",
+      "transport": {
+        "type": "Ship"
+      },
+      "status": "created",
+      "orderId": 3
+    },
+    {
+      "id": 4,
+      "netWeight": 110,
+      "grossWeight": 130,
+      "description": "Toys",
       "transport": {
         "type": "Airplain"
       },
@@ -188,15 +119,81 @@
       "orderId": 3
     },
     {
-      "id": 4,
-      "netWeight": 0,
-      "grossWeight": 0,
-      "description": "",
+      "id": 5,
+      "netWeight": 200,
+      "grossWeight": 240,
+      "description": "Green shelfs",
+      "transport": {
+        "type": "Truck"
+      },
+      "status": "created",
+      "orderId": 4
+    },
+    {
+      "id": 11,
+      "netWeight": 200,
+      "grossWeight": 210,
+      "description": "Toys",
+      "transport": {
+        "type": "Ship"
+      },
+      "status": "Created",
+      "orderId": 3
+    },
+    {
+      "id": 12,
+      "netWeight": 700,
+      "grossWeight": 780,
+      "description": "Skate Boards",
+      "transport": {
+        "type": "Truck"
+      },
+      "status": "Created",
+      "orderId": 3
+    },
+    {
+      "id": 13,
+      "netWeight": 904,
+      "grossWeight": 918,
+      "description": "Computers",
       "transport": {
         "type": "Airplain"
       },
-      "status": "created",
-      "orderId": 3
+      "status": "Created",
+      "orderId": 5
+    },
+    {
+      "id": 14,
+      "netWeight": 904,
+      "grossWeight": 918,
+      "description": "Computers",
+      "transport": {
+        "type": "Airplain"
+      },
+      "status": "Created",
+      "orderId": 5
+    },
+    {
+      "id": 16,
+      "netWeight": 100,
+      "grossWeight": 120,
+      "description": "Shaving machines",
+      "transport": {
+        "type": "Train"
+      },
+      "status": "Created",
+      "orderId": 5
+    },
+    {
+      "id": 17,
+      "netWeight": 3300,
+      "grossWeight": 3550,
+      "description": "Monitors",
+      "transport": {
+        "type": "Ship"
+      },
+      "status": "Created",
+      "orderId": 5
     }
   ],
   "resp": [

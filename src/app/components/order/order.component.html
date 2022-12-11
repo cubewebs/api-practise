@@ -40,12 +40,12 @@
 					*ngIf="isPackage">
 					<div class="grid p-fluid p-4">
 						<div class="col-12">
-							<h4>Order ID: {{order.id}}</h4>
+							<h4>Order ID: {{order.id}} - Package ID: {{pkgId}}</h4>
 						</div>
 						<div class="col-12 md:col-6">
 							<div class="field">
 								<label for="netWeight" class="block">Net Weight</label>
-								<input id="netWeight" 
+								<input id="netW" 
 									   type="number" 
 									   aria-describedby="netWeight-help" 
 									   class="ng-invalid ng-dirty" 
@@ -59,8 +59,8 @@
 						<div class="col-12 md:col-6">
 							<div class="field">
 								<label for="grossWeight" class="block">Gross Weight</label>
-								<input id="grossWeight" 
-									   type="username" 
+								<input id="grossW" 
+									   type="number" 
 									   aria-describedby="grossWeight-help" 
 									   class="ng-invalid ng-dirty" 
 									   pInputText

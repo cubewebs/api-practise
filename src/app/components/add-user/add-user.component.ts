@@ -26,8 +26,8 @@ export class AddUserComponent implements OnInit {
 	fileToUpload: any[] = [];
   
 	userFormData: FormGroup = this.fb.group({
-		firstName: ['', [Validators.required, Validators.minLength(3)]],
-		lastName: ['', [Validators.required, Validators.minLength(3)]],
+		first_name: ['', [Validators.required, Validators.minLength(3)]],
+		last_name: ['', [Validators.required, Validators.minLength(3)]],
 		birthDate: ['', [Validators.required]],
 		email: ['', [Validators.required, Validators.email]],
 		carrier: ['', [Validators.required, Validators.minLength(3)]],
@@ -127,7 +127,7 @@ export class AddUserComponent implements OnInit {
 			  lastName: [ user.last_name ],
 			  birthDate: [ user.birthDate ],
 			  email: [ user.email ],
-			  carrier: [ user.corrier ],
+			  corrier: [ user.corrier ],
 			  address: [ user.address ],
 			  city: [ user.city ],
 			  country: [ user.country ],

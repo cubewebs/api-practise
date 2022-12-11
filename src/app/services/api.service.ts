@@ -78,7 +78,7 @@ export class ApiService {
 
   // Packages calls
 
-  getPackages( orderId: number ): Observable<Package[]> {
+  getOrderPackages( orderId: number ): Observable<Package[]> {
     const url = `${this.baseUrl}orders/${orderId}/packages`;
     return this.http.get<Package[]>( url )
   }
@@ -88,8 +88,8 @@ export class ApiService {
 	return this.http.post<Package>( url, pkg, httpOptions );
   }
 
-  updatePkg( pkg: Package): Observable<Package> {
-	const url = `${this.baseUrl}packages/${pkg.id}`;
+  updatePkg( pkgId: number, pkg: Package): Observable<Package> {
+	const url = `${this.baseUrl}packages/${pkgId}`;
 	return this.http.put<Package>( url, pkg, httpOptions)
   }
 
